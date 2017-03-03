@@ -1,28 +1,11 @@
 Listen 80
-Listen 81
-Listen 8080
-
-<VirtualHost *:8080>
-    DocumentRoot /var/www/html
-
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-<VirtualHost *:81>
-    DocumentRoot /var/www/html
-
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
 <VirtualHost *:80>
     ProxyRequests Off
 
+    DocumentRoot /var/www/html
+
     ProxyPass "/nodejs/" "http://127.0.0.1:8080/"
     ProxyPassReverse "/nodejs/" "http://127.0.0.1:8080/"
-    
-    ProxyPass        "/" "http://127.0.0.1:81/"
-    ProxyPassReverse "/" "http://127.0.0.1:81/"
-
 
     # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
     # error, crit, alert, emerg.
