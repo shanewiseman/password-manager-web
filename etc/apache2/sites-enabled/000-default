@@ -1,7 +1,7 @@
 Listen 80
 
 <VirtualHost *:80>
-
+    DocumentRoot /var/www/html
     ProxyRequests Off
 
     ProxyPass "/nodejs/" "http://127.0.0.1:8080/"
