@@ -1,11 +1,16 @@
 Listen 80
+Listen 81
+
+<VirtualHost *:81>
+DocumentRoot /var/www/html
+</VirtualHost>
 <VirtualHost *:80>
     ProxyRequests Off
 
     DocumentRoot /var/www/html
 
-    ProxyPass "/nodejs/" "http://127.0.0.1:8080/"
-    ProxyPassReverse "/nodejs/" "http://127.0.0.1:8080/"
+    ProxyPass "/nodejs/" "http://127.0.0.1:81/"
+    ProxyPassReverse "/nodejs/" "http://127.0.0.1:81/"
 
     # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
     # error, crit, alert, emerg.
