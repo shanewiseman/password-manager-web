@@ -1,5 +1,13 @@
 Listen 80
 Listen 81
+Listen 8080
+
+<VirtualHost *:8080>
+    DocumentRoot /var/www/html
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
 <VirtualHost *:81>
     DocumentRoot /var/www/html
 
