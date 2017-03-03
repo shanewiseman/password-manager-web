@@ -1,6 +1,8 @@
 Listen 80
 
 <VirtualHost *:80>
+
+    ServerName password.shanedbwiseman.internal
     ProxyRequests Off
 
     DocumentRoot /var/www/html
