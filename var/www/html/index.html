@@ -19,7 +19,6 @@ function login(){
         return
     }
 
-
     username = $('#text-name').val()
     password = $('#text-pass').val()
     gatherList()
@@ -100,25 +99,19 @@ function gatherList(){
                  }
     });
 }
-
-
-
 </script>
-
-
 <body>
 <div data-role="page" id="pagemain" data-dialog="true">
   <div data-role="header">
     <h1>Password Manager Login</h1>
   </div>
-
   <div data-role="main" class="ui-content">
       <form>
                <label for="text-1">User Name:</label>
                <input type="text" name="text-1" id="text-name" value="">
 
                <label for="text-1">Password:</label>
-               <input type="text" name="text-1" id="text-pass" value="">
+               <input type="password" name="text-1" id="text-pass" value="">
                <a href="#pageURLS" class="ui-btn" onclick="login()">Submit</a>
       </form>
   </div>
@@ -128,30 +121,23 @@ function gatherList(){
   <div data-role="footer">
   </div>
 </div> 
-
-
 <div data-role="page" id="pageURLS" data-dialog="true">
   <div data-role="header">
     <h1>Password Manager</h1>
   </div>
-
   <div data-role="main" class="ui-content">
     <div id="url_list"></div>
     <a href="" class="ui-btn ui-btn-inline">Delete Existing</a>
     <a href="#createNew" class="ui-btn ui-btn-inline">Create New Password</a>
   </div>
-
   <div data-role="footer">
   </div>
 </div> 
-
 <div data-role="page" id="createNew" data-dialog="true">
   <div data-role="header">
     <h1>Password Manager: Create New</h1>
   </div>
-
   <div data-role="main" class="ui-content">
-
     <form>
         <label for="text-1">Name:</label>
         <input type="text" name="text-1" id="text-newname" value="">
@@ -170,14 +156,8 @@ function gatherList(){
     <a href="#pageURLS" onclick="createNew()" class="ui-btn ui-btn-inline">Create</a>
     <a href="#pageURLS" class="ui-btn ui-btn-inline">Cancel</a>
   </div>
-
   <div data-role="footer">
   </div>
 </div> 
-
-
-
 </body>
-
 </html>
-
