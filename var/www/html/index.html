@@ -86,7 +86,7 @@ function gatherList(){
                                  'success' :
                                 
                                      function(password_data){
-                                        $('#url_list').append('<a href="#pagetwo" class="btn ui-btn" data-clipboard-text="'+ 
+                                        $('#url_list_' + (this.indexValue % 2 ).toString() ).append('<a href="#pagetwo" class="btn ui-btn" data-clipboard-text="'+ 
                                                 password_data.password+'">'+url_data.urls[this.indexValue]+'</a>')
 
                                         if(x == url_data.urls.length - 1){
@@ -128,7 +128,7 @@ function gatherList(){
     <h1>Password Manager</h1>
   </div>
   <div data-role="main" class="ui-content">
-    <div id="url_list"></div>
+      <div id="url_list"><div class="ui-grid-a"><div id="url_list_0" class="ui-block-a"></div><div id="url_list_1" class="ui-block-b"></div></div>
     <a href="" class="ui-btn ui-btn-inline">Delete Existing</a>
     <a href="#createNew" class="ui-btn ui-btn-inline">Create New Password</a>
   </div>
