@@ -2,13 +2,15 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" crossorigin="anonymous" integrity="/Ayp+mRNZjWzcpWvoDvKSHShOLWNo8Xvhjt1jsuzrSlEUnuydeBTHeA13ApkKvSP">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js" crossorigin="anonymous" integrity="+54fLHoW8AHu3nHtUxs9fW2XKOZ2ZwKHB5olRtKSDTKJIb1Na1EceFZMS8E72mzW"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" crossorigin="anonymous" integrity="u7i0wHEdsFrw92D1Z0sk2r6kiOGnZJhnawPUT0he8TRKfD4/XMEsj22l/cHFXO3v"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js" crossorigin="anonymous" integrity="o+v6ZDbtVjXVRgufA7W/BjTyhhLwWB6fBjDhHbKHHKXywJtgFD0lNG7FFhPYo1uS"></script>
+
 </head>
 
 <script>
+//TODO WE NEED MOVE ALL JAVASCRIPT INTO FILE, NOTHING INLINE! CSP requires
 var username = ""
 var password = ""
 
@@ -24,8 +26,6 @@ function login(){
     gatherList()
 }
 function createNew(){
-//TODO this function will run with a blank name, not good
-//TODO we need to uncheck all of the check boxes, or check them all
 
     $.ajax({ 'url' : 'https://password.shanedbwiseman.com/nodejs/CREATE', 
              'contentType' : "application/json; charset=utf-8", 
@@ -72,7 +72,11 @@ function gatherList(){
              'success' : 
 	    
                  function(url_data){
-                    for(x in url_data.urls){
+                    
+
+
+
+                    for(x in url_data.urls.sort()){
                         $.ajax({ 'indexValue' : x, 
                                  'url' : 'https://password.shanedbwiseman.com/nodejs/GET', 
                                  'contentType' : "application/json; charset=utf-8", 
