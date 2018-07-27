@@ -123,6 +123,15 @@ function gatherList(){
   <div data-role="footer">
   </div>
 </div> 
+
+<script>
+    $( document ).on( "pagecreate", "#pageURLS", function ( event ) {
+        if(password == ""){
+            document.location.href = url;
+        }
+    });
+</script>
+
 <div data-role="page" id="pageURLS" data-dialog="true">
   <div data-role="header">
     <h1>Password Manager</h1>
