@@ -73,28 +73,28 @@ function gatherList(){
 	    
                  function(url_data){
                     
+                    
 
 
+                    $.ajax({  
+                             'url' : 'https://password.shanedbwiseman.com/nodejs/GETALL', 
+                             'contentType' : "application/json; charset=utf-8", 
+                             'data' : '{"username":"'+username+'","password":"'+password+'", "urls":'+JSON.stringify(url_data.urls.sort())+'}', 
+                             'dataType' : 'json', 
+                             'method' : 'POST', 
+                             'success' :
+                            
+                                 function(password_data){
+                                     for( i in password_data){
+                                        $('#url_list_' + (i % 2 ).toString() ).append('<a href="#pagetwo" class="btn ui-btn" data-clipboard-text="'+ 
+                                                password_data[i].password+'">'+password_data[i].url+'</a>')
 
-                    for(x in url_data.urls.sort()){
-                        $.ajax({ 'indexValue' : x, 
-                                 'url' : 'https://password.shanedbwiseman.com/nodejs/GET', 
-                                 'contentType' : "application/json; charset=utf-8", 
-                                 'data' : '{"username":"'+username+'","password":"'+password+'", "url":"'+url_data.urls[x]+'"}', 
-                                 'dataType' : 'json', 
-                                 'method' : 'POST', 
-                                 'success' :
-                                
-                                     function(password_data){
-                                        $('#url_list_' + (this.indexValue % 2 ).toString() ).append('<a href="#pagetwo" class="btn ui-btn" data-clipboard-text="'+ 
-                                                password_data.password+'">'+url_data.urls[this.indexValue]+'</a>')
-
-                                        if(x == url_data.urls.length - 1){
+                                        if(i == url_data.urls.length - 1){
                                             new Clipboard('.btn');
                                         }
                                     }
-                        })
-                    }
+                                 }
+                    })
 	            },
              'error' : 
                  function(jqxhr, textStatus, errorThrown){
