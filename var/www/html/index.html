@@ -39,7 +39,6 @@ function generate_token(){
             function(data){
                 $('#label-token').text("Generated Token:")
                 $('#text_input-token').val(data.token); 
-                console.log("DONE")
                 token = data.token
             },
         'error' :
@@ -62,7 +61,6 @@ function login(){
 
     token = $('#text_input-token').val()
     if( token == "" ){
-        console.log("Token Empty")
         generate_token()
     }
 
