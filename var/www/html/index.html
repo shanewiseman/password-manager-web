@@ -13,6 +13,45 @@
 //TODO WE NEED MOVE ALL JAVASCRIPT INTO FILE, NOTHING INLINE! CSP requires
 var username = ""
 var password = ""
+var token    = ""
+
+
+
+function generate_token(){
+
+    if($('#text-name').val() == "" || $('#text-pass').val() == ""){
+        alert("Enter Username and Password")
+        $( "#collapsible-token" ).collapsible( "expand" )
+        return
+    }
+    username = $('#text-name').val()
+    password = $('#text-pass').val()
+    $('#header-token').removeAttr('onclick')
+
+    $.ajax({ 
+        'url'         : 'https://password.shanedbwiseman.com/nodejs/GET/TOKEN', 
+        'contentType' : "application/json; charset=utf-8",
+        'data'        : '{"username":"'+username+'","password":"'+password+'"}',
+        'dataType'    : 'json',
+        'async'       : false,
+        'method'      :'POST',
+        'success' : 
+            function(data){
+                $('#label-token').text("Generated Token:")
+                $('#text_input-token').val(data.token); 
+                console.log("DONE")
+                token = data.token
+            },
+        'error' :
+            function(jqxhr, textStatus, errorThrown){
+                //Fail sliently
+                console.log("Failed To Get Token")
+                $('#label-token').text("Provide Token:")
+            
+            }
+    })
+
+}
 
 function login(){
 
@@ -21,15 +60,22 @@ function login(){
         return
     }
 
+    token = $('#text_input-token').val()
+    if( token == "" ){
+        console.log("Token Empty")
+        generate_token()
+    }
+
     username = $('#text-name').val()
     password = $('#text-pass').val()
+
     gatherList()
 }
 function createNew(){
 
     $.ajax({ 'url' : 'https://password.shanedbwiseman.com/nodejs/CREATE', 
              'contentType' : "application/json; charset=utf-8", 
-             'data' : '{"username":"'+username+'","password":"'+password+'",'+
+             'data' : '{"username":"'+username+'","password":"'+password+'","token":"'+token+'",'+
              '"url":"'+$('#text-newname').val()+'",'+
              '"symbols":'+$('#checkbox-symbols').prop('checked')+', '+
              '"numbers":'+$('#checkbox-numbers').prop('checked')+', '+
@@ -66,7 +112,7 @@ function gatherList(){
 
     $.ajax({ 'url' : 'https://password.shanedbwiseman.com/nodejs/LIST', 
              'contentType' : "application/json; charset=utf-8", 
-             'data' : '{"username":"'+username+'","password":"'+password+'"}', 
+             'data' : '{"username":"'+username+'","password":"'+password+'","token":"'+token+'"}', 
              'dataType' : 'json', 
              'method' : 'POST', 
              'success' : 
@@ -79,7 +125,7 @@ function gatherList(){
                     $.ajax({  
                              'url' : 'https://password.shanedbwiseman.com/nodejs/GETALL', 
                              'contentType' : "application/json; charset=utf-8", 
-                             'data' : '{"username":"'+username+'","password":"'+password+'", "urls":'+JSON.stringify(url_data.urls.sort())+'}', 
+                             'data' : '{"username":"'+username+'","password":"'+password+'","token":"'+token+'","urls":'+JSON.stringify(url_data.urls.sort())+'}', 
                              'dataType' : 'json', 
                              'method' : 'POST', 
                              'success' :
@@ -99,7 +145,7 @@ function gatherList(){
              'error' : 
                  function(jqxhr, textStatus, errorThrown){
                     alert("Failure in Getting Account Details")
-                    window.location.replace("https://password.shanedbwiseman.com/")
+                    //window.location.replace("https://password.shanedbwiseman.com/")
                  }
     });
 }
@@ -115,6 +161,11 @@ function gatherList(){
           <label for="text-1">Password:</label>
           <input type="password" name="text-1" id="text-pass" value="">
           <a href="#pageURLS" class="ui-btn" onclick="login()">Submit</a>
+          <div id='collapsible-token' data-role="collapsible" data-inset="false">
+              <h3 id="header-token" onclick="generate_token()">Token </h3>
+              <label id="label-token" for="token"></label>
+              <input type="text" name="token" id="text_input-token" value="">
+          </div>
       </form>
   </div>
     <div id="missingauth" data-role="popup" data-overlay-theme="a" class="ui-content">
