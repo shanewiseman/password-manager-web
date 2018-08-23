@@ -177,6 +177,7 @@ function gatherList(){
     $( document ).on( "pagecreate", "#pageURLS", function ( event ) {
         if(password == ""){
             document.location.href = '#pagemain';
+            $('#text_input-token').val("")
         }
     });
 </script>
