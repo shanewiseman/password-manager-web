@@ -6,6 +6,7 @@
 <script src="https://code.jquery.com/jquery-1.11.3.min.js" crossorigin="anonymous" integrity="sha384-+54fLHoW8AHu3nHtUxs9fW2XKOZ2ZwKHB5olRtKSDTKJIb1Na1EceFZMS8E72mzW"></script>
 <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" crossorigin="anonymous" integrity="sha384-u7i0wHEdsFrw92D1Z0sk2r6kiOGnZJhnawPUT0he8TRKfD4/XMEsj22l/cHFXO3v"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js" crossorigin="anonymous" integrity="sha384-o+v6ZDbtVjXVRgufA7W/BjTyhhLwWB6fBjDhHbKHHKXywJtgFD0lNG7FFhPYo1uS"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js" crossorigin="anonymous" integrity="sha256-oej/bjQzRRpjdljoFhaFIjPYZoQYbquTYpt5yU0Vso8="></script>
 
 </head>
 
@@ -16,6 +17,11 @@ var password = ""
 var token    = ""
 
 
+$( document ).ready(function(){
+    if( Cookies.get('username') != undefined){
+        $('#text-name').val(Cookies.get('username'))
+    }
+})
 
 function generate_token(){
 
@@ -66,6 +72,7 @@ function login(){
 
     username = $('#text-name').val()
     password = $('#text-pass').val()
+    Cookies.set('username', username, { expires: 1);
 
     gatherList()
 }
@@ -178,6 +185,13 @@ function gatherList(){
         if(password == ""){
             document.location.href = '#pagemain';
             $('#text_input-token').val("")
+            
+            if(Cookies.get('username') != undefined){
+                $('#text-name').val(Cookies.get('username'))
+            }
+
+            $('#header-token').attr("onclick","generate_token()")
+
         }
     });
 </script>
